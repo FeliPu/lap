@@ -33,14 +33,11 @@ if (!$con) {
 			<input type="text" name="enterhere">
 			<input type="submit" name="submit">
 		</form>
-
 		<div class="output">
 			Pescribed Drug:
 			<?php
 			if (isset($_POST['submit'])) {
-
 				$search = $_POST['enterhere'];
-
 				$statement = $con->prepare("SELECT * FROM patientenakte.befund as b
 			 	Join patientenakte.Medikamente as m
 				ON b.medikamente_idMedikamente = m.idmedikamente
@@ -48,9 +45,7 @@ if (!$con) {
 				ON b.Patient_idPatient = p.idPatient
 				WHERE Patient_Name = ?
 				");
-
 				$statement->execute(array($search));
-
 				while ($row = $statement->fetch()) {
 					echo $row['Dosierung'];
 					echo str_repeat('&nbsp;', 1);
@@ -58,7 +53,6 @@ if (!$con) {
 				}
 			}
 			?>
-
 		</div>
 	</main>
 	<div class="input">
@@ -73,11 +67,9 @@ if (!$con) {
 		<div class="output">
 		<?php
 		if (isset($_POST['imput'])) {
-
 			$in1 = $_POST['mednr'];
 			$in2 = $_POST['medna'];
 			$postitman = $con->prepare("INSERT INTO patientenakte.Medikamente VALUES (?, ?)");
-
 			$postitman->execute(array($in1, $in2));
 		}
 		$con = null;
